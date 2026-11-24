@@ -1,41 +1,46 @@
 # Education, Salary and Working Hours Analysis
 
 ## Research Question
-Does higher education level lead to higher annual salary? And how does education relate to weekly working hours? This project uses exploratory data analysis and visualization to compare workers across five education groups (from "No diploma" to "Bachelor's degree or higher").
+Does a higher education level correspond to a higher annual salary, and how does education relate to weekly working hours? This project compares workers across five education groups using exploratory data analysis and visualization.
 
 ## Dataset
 - **File**: `age_salary_hours.csv`
-- **Source**: Public US census-style dataset used in the CISC7204 course (University of Macau). It contains individual-level records of age, education level, annual salary, and weekly working hours.
-- **Usage**: The dataset is used for academic teaching purposes only. No personal identifiable information is included.
+- **Source**: dataset provided for the CISC7204 course teaching exercise (University of Macau).
+- **Usage permissions**: used for academic teaching and analysis only. The file contains no personal identifiable information.
+- **Columns**: `Age`, `Annual Salary`, `Weekly hours`, `Education`. The currency unit is not specified in the source file.
+- **Sample**: 500 rows in total; 385 rows remain after filtering to workers aged under 65.
 
 ## Methods and Tools
-- **Python 3** with **pandas** for data loading and filtering (workers aged 65 or younger).
-- **matplotlib** and **seaborn** for plotting.
-- **squarify** for the treemap.
-- Two visualizations:
-  1. **Treemap** showing the proportion of workers in each education group.
-  2. **Violin plots** comparing annual salary and weekly working hours across education groups.
+- **Python 3**, **pandas** for loading the data and applying the age filter.
+- **squarify** for a treemap showing the sample share of each education group.
+- **matplotlib** and **seaborn** for violin plots comparing annual salary and weekly hours across groups.
+- The filtered sample is summarized by education group (sample size, salary median and mean, hours median and mean) before plotting.
 
 ## Key Findings
-- Workers with a Bachelor's degree or higher generally show a higher annual salary distribution than workers with no diploma.
-- The violin plots also reveal that higher education groups tend to have a narrower, more stable range of weekly working hours.
-- The treemap shows how the sample is distributed across education categories, so the reader can judge whether each group has enough people to compare.
+- Workers with a **Bachelor's degree or higher** have the highest salary distribution: median 61,000 and mean about 89,963 (n = 195).
+- The other four groups have salary medians between about 20,400 and 38,000. Salary does **not** increase monotonically with education; the small "No diploma" group (n = 11) has a median of 38,000.
+- Weekly working hours are similar across groups (median 37–40 hours). The data do not show a clear monotonic relationship between education and weekly hours.
 
-## Limitation
-- This is an observational dataset, so the plots show correlation, not causation. Other factors (age, industry, location) are not controlled for in this simple visualization.
+## Limitations
+- This is observational data, so the plots show correlation, not causation. Age, industry, and location are not controlled for.
+- The dataset contains zero salary values (65 rows) and zero hour values (54 rows); these were kept rather than separately coded.
+- The filtered sample has 385 rows, and some education groups are small, so group comparisons are not equally reliable.
+- The currency unit is not stated in the source file.
 
-## How to Run
+## Reproduction Instructions
 1. Install the required packages:
    ```
    pip install -r requirements.txt
    ```
-2. Open `education_salary_analysis.ipynb` with Jupyter Notebook or JupyterLab.
-3. Make sure `age_salary_hours.csv` is in the same folder as the notebook.
-4. Run all cells top to bottom. The treemap and violin plots will display inline.
+2. Place `age_salary_hours.csv` in the same folder as `education_salary_analysis.ipynb`.
+3. Open the notebook with Jupyter Notebook or JupyterLab and run all cells top to bottom.
+4. The two figures are saved to `images/`:
+   - `images/treemap_education.png`
+   - `images/violin_salary_hours.png`
 
 ## Files
-- `education_salary_analysis.ipynb` — notebook with full code and output
+- `education_salary_analysis.ipynb` — analysis notebook with code, outputs, and figure exports
 - `age_salary_hours.csv` — dataset
-- `treemap_education.png` — treemap image
-- `violin_salary_hours.png` — violin plot image
-- `requirements.txt` — Python packages needed
+- `images/treemap_education.png` — sample distribution by education level
+- `images/violin_salary_hours.png` — salary and weekly hours by education level
+- `requirements.txt` — Python packages required to run the notebook
